@@ -3,16 +3,8 @@ hello world
 
 
 
-
-
-
-
-
-
-
-
-
 import sys
+from PIL import Image
 from PySide6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton, QLineEdit,
                                 QHBoxLayout, QVBoxLayout, QDialog, QTextBrowser, QComboBox)
 from PySide6.QtGui import QPixmap
@@ -33,6 +25,7 @@ class MyWindow(QWidget):
 
     self.my_pic_list = ['Mountain', 'Plains', 'Desert']
     self.my_filter_list = ['Sunrise', 'Midday', 'Night']
+    self.my_images = ['mountain.jpg', 'plains.jpg', 'desert.jpg']
     self.my_lineedit = QLineEdit("Please select an Image and a Filter.")
     self.combo = QComboBox()
     self.combo.addItems(self.my_pic_list)
@@ -51,9 +44,13 @@ class MyWindow(QWidget):
   @Slot()
   def open_win(self):
     i = self.combo.currentIndex()
-    self.new_win = NewWindow(self.my_pic_list[i])
-    self.new_win.show()
-    self.repaint()
+    if i == 0:
+        im = Image.open("mountain.jpg")
+    if i == 1:
+        im = Image.open('plains.jpg')
+    if i == 2:
+        im = Image.open('desert.jpg')
+    im.show()
 
 app = QApplication(sys.argv)
 main = MyWindow()
