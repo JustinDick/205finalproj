@@ -112,6 +112,39 @@ app.exec_()
 
 
 
+# code for image filtering
+j = self.combo2.currentIndex()
+if j == 0:
+        filter_nums = [255, 191, 39]
+    if j == 1:
+        filter_nums = [0, 0, 0]
+    if j == 2:
+        filter_nums = [43, 61, 72]
 
+    pic_height = im.height
+    pic_width = im.width
+
+    new_image = Image.new("RGB", (pic_width,  pic_height))
+
+    red_pixels = []
+    green_pixels = []
+    blue_pixels = []
+
+    for x in range(pic_width):
+        for y in range(pic_height):
+            temp_tuple = im.getpixel((x,y))
+
+            # get the rgb colors of the pixel
+            red_new = int((temp_tuple[0]+filter_nums[0])/2)
+            green_new = int((temp_tuple[1]+filter_nums[1])/2)
+            blue_new = int((temp_tuple[2]+filter_nums[2])/2)
+
+
+
+            # put the pixels into new_image
+            rgb_val =(red_new, green_new, blue_new)
+            new_image.putpixel((x,y), rgb_val)
+
+    new_image.show()
 
 
