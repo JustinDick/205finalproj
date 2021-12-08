@@ -47,7 +47,7 @@ class MyWindow(QWidget):
     if i == 0:
         im = Image.open("mountain.jpg")
     if i == 1:
-        im = Image.open('plains.jpg')
+        im = Image.open('field.jpg')
     if i == 2:
         im = Image.open('desert.jpg')
     if i == 3:
@@ -55,7 +55,9 @@ class MyWindow(QWidget):
     if i == 4:
         im = Image.open('beach.jpg')
     if i == 5:
-        im = Image.open('fields.jpg')
+        im = Image.open('swamp.jpg')
+    if i == 6:
+        im = Image.open('forest.jpg')
     im.show()
 
 app = QApplication(sys.argv)
@@ -85,13 +87,19 @@ class MainWindow(QWidget):
         super().__init__()
         self.label = QLabel()
         pixmap = QPixmap('images/moutains')
-        pixmap2 = QPixmap('images/plains')
+        pixmap2 = QPixmap('images/field')
         pixmap3 = QPixmap('images/dessert')
         pixmap4 = QPixmap('images/city')
         pixmap5 = QPixmap('images/beach')
-        pixmap6 = QPixmap('images/plains')
-        pixmap7 = QPixmap('images/')
+        pixmap6 = QPixmap('images/swamp')
+        pixmap7 = QPixmap('images/forest')
         pixmap = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap2 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap3 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap4 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap5 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap6 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
+        pixmap7 = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
         self.label.setPixmap(pixmap)
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.label)
