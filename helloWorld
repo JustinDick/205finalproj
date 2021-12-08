@@ -157,4 +157,100 @@ app.exec_()
 
 
 
+import sys
+from PIL import Image
+from PySide6.QtWidgets import (QApplication, QWidget, QLabel, QPushButton, QLineEdit,
+                                QHBoxLayout, QVBoxLayout, QDialog, QTextBrowser, QComboBox)
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Slot
 
+class NewWindow(QWidget):
+  def __init__(self, url):
+    super().__init__()
+    self.text = QLabel(url)
+    self.layout = QVBoxLayout()
+    self.layout.addWidget(self.text)
+    self.setLayout(self.layout)
+
+
+class MyWindow(QWidget):
+  def __init__(self):
+    super().__init__()
+
+    self.my_pic_list = ['Mountain', 'Plains', 'Desert', 'Beach', 'Forest', 'City', 'Swamp']
+    self.my_filter_list = ['Sunrise', 'SunSet', 'Night']
+    self.my_images = ['mountain.jpg', 'plains.jpg', 'desert.jpg', 'beach.jpg', 'forest.jpg', 'city.jpg', 'swamp.jpg']
+    self.my_lineedit = QLineEdit("Please select an Image and a Filter.")
+    self.combo = QComboBox()
+    self.combo.addItems(self.my_pic_list)
+    self.combo2 = QComboBox()
+    self.combo2.addItems(self.my_filter_list)
+    self.btn = QPushButton('CLICK ME')
+    vbox = QVBoxLayout()
+    vbox.addWidget(self.my_lineedit)
+    vbox.addWidget(self.combo)
+    vbox.addWidget(self.combo2)
+    vbox.addWidget(self.btn)
+    self.setLayout(vbox)
+
+    self.btn.clicked.connect(self.open_win)
+
+
+  @Slot()
+  def open_win(self):
+    i = self.combo.currentIndex()
+    j = self.combo2.currentIndex()
+    if i == 0:
+        im = Image.open("mountain.jpg")
+    if i == 1:
+        im = Image.open('plains.jpg')
+    if i == 2:
+        im = Image.open('desert.jpg')
+    if i == 3:
+        im = Image.open('beach.jpg')
+    if i == 4:
+        im = Image.open('forest.jpg')
+    if i == 5:
+        im = Image.open('city.jpg')
+    if i == 6:
+        im = Image.open('swamp.jpg')
+
+    if j == 0:
+        filter_nums = [1.3, 1.3, 1.1]
+    if j == 1:
+        filter_nums = [.7, .4, .7]
+    if j == 2:
+        filter_nums = [.1, .1, .2]
+
+    pic_height = im.height
+    pic_width = im.width
+
+    new_image = Image.new("RGB", (pic_width,  pic_height))
+
+    red_pixels = []
+    green_pixels = []
+    blue_pixels = []
+
+    for x in range(pic_width):
+        for y in range(pic_height):
+            temp_tuple = im.getpixel((x,y))
+
+            # get the rgb colors of the pixel
+            red_new = int(temp_tuple[0]*filter_nums[0])
+            green_new = int(temp_tuple[1]*filter_nums[1])
+            blue_new = int(temp_tuple[2]*filter_nums[2])
+
+
+
+            # put the pixels into new_image
+            rgb_val =(red_new, green_new, blue_new)
+            new_image.putpixel((x,y), rgb_val)
+
+    new_image.show()
+
+
+
+app = QApplication(sys.argv)
+main = MyWindow()
+main.show()
+sys.exit(app.exec_())
