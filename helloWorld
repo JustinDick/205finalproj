@@ -50,6 +50,12 @@ class MyWindow(QWidget):
         im = Image.open('plains.jpg')
     if i == 2:
         im = Image.open('desert.jpg')
+    if i == 3:
+        im = Image.open('city.jpg')
+    if i == 4:
+        im = Image.open('beach.jpg')
+    if i == 5:
+        im = Image.open('fields.jpg')
     im.show()
 
 app = QApplication(sys.argv)
@@ -78,12 +84,12 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.label = QLabel()
-        pixmap = QPixmap('images/')
-        pixmap2 = QPixmap('images/')
-        pixmap3 = QPixmap('images/')
-        pixmap4 = QPixmap('images/')
-        pixmap5 = QPixmap('images/')
-        pixmap6 = QPixmap('images/')
+        pixmap = QPixmap('images/moutains')
+        pixmap2 = QPixmap('images/plains')
+        pixmap3 = QPixmap('images/dessert')
+        pixmap4 = QPixmap('images/city')
+        pixmap5 = QPixmap('images/beach')
+        pixmap6 = QPixmap('images/plains')
         pixmap7 = QPixmap('images/')
         pixmap = pixmap.scaled(500, 500, Qt.KeepAspectRatio)
         self.label.setPixmap(pixmap)
