@@ -1,5 +1,5 @@
 hello world
-
+# Justing Dick, Ulrich Haydt, Kevin Nguyen, Treya Soriano
 
 
 
@@ -119,7 +119,8 @@ sys.exit(app.exec_())
 
 
 
-
+#Ulrich the idea with the QPixmap was to make the images smaller and use the QPixmap to also add the effect to the picture but I could not figure out how to do that.
+So we used the method Justin made for the effects.
 import sys
 from PySide6.QtWidgets import (QApplication, QWidget, QLabel, QVBoxLayout)
 from PySide6.QtGui import QPixmap
