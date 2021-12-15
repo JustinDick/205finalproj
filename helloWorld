@@ -351,6 +351,8 @@ class MyWindow(QWidget):
         filter_nums = [.7, .4, .7]
     if j == 2:
         filter_nums = [.1, .1, .2]
+    if j == 3:
+        filter_nums = [1, 1, 1]
 
     # finds the dimensions of the selected image
     pic_height = im.height
@@ -362,6 +364,7 @@ class MyWindow(QWidget):
     red_pixels = []
     green_pixels = []
     blue_pixels = []
+    neg_pixels = []
 
     # runs through each pixel in the selected image
     for x in range(pic_width):
@@ -369,17 +372,25 @@ class MyWindow(QWidget):
             # finds the color value of the pixel
             temp_tuple = im.getpixel((x,y))
 
-            # applies the filter to the found pixel and saves it
-            red_new = int(temp_tuple[0]*filter_nums[0])
-            green_new = int(temp_tuple[1]*filter_nums[1])
-            blue_new = int(temp_tuple[2]*filter_nums[2])
+            if j != 3:
+                # applies the filter to the found pixel and saves it
+                red_new = int(temp_tuple[0]*filter_nums[0])
+                green_new = int(temp_tuple[1]*filter_nums[1])
+                blue_new = int(temp_tuple[2]*filter_nums[2])
 
+                # put the pixels into new_image
+                rgb_val =(red_new, green_new, blue_new)
+                new_image.putpixel((x,y), rgb_val)
 
-
-
-            # put the pixels into new_image
-            rgb_val =(red_new, green_new, blue_new)
-            new_image.putpixel((x,y), rgb_val)
+            else:
+                red_new = int(temp_tuple[0]*filter_nums[0])
+                green_new = int(temp_tuple[1]*filter_nums[1])
+                blue_new = int(temp_tuple[2]*filter_nums[2])
+                red_neg_new = (255-red_new) 
+                green_neg_new = (255-green_new)
+                blue_neg_new = (255-blue_new)
+                neg_val =(red_neg_new, green_neg_new, blue_neg_new)
+                new_image.putpixel((x,y), neg_val)
 
     # shows the now filtered image
     new_image.show()
